@@ -1,15 +1,21 @@
-name: Get pods
-on: [push]
+name: Build and Deploy
+
+on:
+  push:
 
 jobs:
-  deploy:
-    name: Deploy
+  deploy_to_kubernetes_cluster:
+    name: Deploy to Kubernetes Cluster
+    needs: push_docker_image_to_github_packages
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Set Kubernetes Context
+        uses: azure/k8s-set-context@v1
         with:
-          args: get pods
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
+      - name: Deploy to Cluster
+        run: |
+          kubectl get pods
