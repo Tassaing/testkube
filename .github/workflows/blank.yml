@@ -2,11 +2,9 @@ name: Build and Deploy
 
 on:
   push:
-
 jobs:
   deploy_to_kubernetes_cluster:
     name: Deploy to Kubernetes Cluster
-    needs: push_docker_image_to_github_packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
