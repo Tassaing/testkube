@@ -10,10 +10,11 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Set Kubernetes Context
-        uses: azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBE_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
+        uses: azure/k8s-actions/k8s-set-context@master
+         with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}v# Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
+          context: '<context name>'  # Optional, uses the current-context from kubeconfig by default
+          id: login
       - name: Deploy to Cluster
         run: |
           kubectl get deployments --all-namespaces
