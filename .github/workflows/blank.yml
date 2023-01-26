@@ -16,4 +16,4 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG }} # Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
       - name: Deploy to Cluster
         run: |
-          kubectl get pods
+          kubectl get pods --all-namespaces
