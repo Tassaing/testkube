@@ -12,8 +12,8 @@ jobs:
       - name: Set Kubernetes Context
         uses: azure/k8s-actions/k8s-set-context@master
         with:
-          kubeconfig: ${{ secrets.KUBE_CONFIG }}v# Use secret (https://developer.github.com/actions/managing-workflows/storing-secrets/)
-          context: '<context name>'  # Optional, uses the current-context from kubeconfig by default
+         k8s-url: http://tassk3s.duckdns.org:8031
+         k8s-secret: ${{ secrets.KUBE_CONFIG }} # token value from the result of the below script
         id: login
       - name: Deploy to Cluster
         run: |
