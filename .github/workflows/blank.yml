@@ -10,7 +10,7 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
       - name: Set Kubernetes Context
-        uses: azure/k8s-actions/k8s-set-context@master
+        uses: azure/k8s-set-context@v3
         with:
          k8s-url: http://tassk3s.duckdns.org:8031
          k8s-secret: ${{ secrets.KUBE_CONFIG }} # token value from the result of the below script
