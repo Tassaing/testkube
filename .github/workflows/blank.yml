@@ -16,4 +16,4 @@ jobs:
          kubeconfig: ${{ secrets.KUBE_CONFIG }}
       - name: Deploy to Cluster
         run: |
-          kubectl get deployments --all-namespaces
+          kubectl get deployments
