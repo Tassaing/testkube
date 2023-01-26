@@ -12,9 +12,8 @@ jobs:
       - name: Set Kubernetes Context
         uses: azure/k8s-set-context@v3
         with:
-         k8s-url: http://tassk3s.duckdns.org:8031
-         k8s-secret: ${{ secrets.KUBE_CONFIG }} # token value from the result of the below script
-        id: login
+         method: kubeconfig
+         kubeconfig: ${{ secrets.KUBE_CONFIG }}
       - name: Deploy to Cluster
         run: |
           kubectl get deployments --all-namespaces
