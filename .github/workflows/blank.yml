@@ -1,17 +1,19 @@
-name: Get pods
-on: [push]
+name: Build and Deploy
 
+on:
+  push:
 jobs:
-  deploy:
-    name: Deploy
+  deploy_to_kubernetes_cluster:
+    name: Deploy to Kubernetes Cluster
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Set Kubernetes Context
+        uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-
-      - uses: actions-hub/kubectl@master
+          KUBE_HOST: ${{ secrets.KUBE_HOST }}
+          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: get pods
+           args: get pods
+
