@@ -5,7 +5,7 @@ on:
 jobs:
   deploy_to_kubernetes_cluster:
     name: Deploy to Kubernetes Cluster
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v2
